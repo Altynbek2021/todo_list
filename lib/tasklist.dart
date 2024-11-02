@@ -5,7 +5,12 @@ class Tasks_List extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      children: [TaskTile()],
+      children: [
+        TaskTile(),
+        TaskTile(),
+        TaskTile(),
+        TaskTile(),
+      ],
     );
   }
 }
