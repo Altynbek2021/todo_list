@@ -1,12 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:todo_list/addtaskto.dart';
+import 'package:todo_list/task.dart';
 import 'package:todo_list/tasklist.dart';
 
-class TasksScreen extends StatelessWidget {
-  const TasksScreen({super.key});
+class TasksScreen extends StatefulWidget {
+  TasksScreen({super.key});
 
+  @override
+  State<TasksScreen> createState() => _TasksScreenState();
+}
+
+class _TasksScreenState extends State<TasksScreen> {
   Widget buildButtomSheet(BuildContext context) {
-    return AddtasktoScreen();
+    return TasksScreen();
+  }
+
+  List<Task> tasks = [
+    Task(name: "Buy milk"),
+    Task(name: "Buy milk"),
+    Task(name: "Buy milk"),
+    Task(name: "By chocolate")
+  ];
+
+  void addTask(String val) {
+    setState(() {
+      tasks.add(Task(name: val));
+    });
+    Navigator.pop(context);
   }
 
   @override
@@ -19,12 +39,10 @@ class TasksScreen extends StatelessWidget {
               context: context,
               isScrollControlled: true,
               builder: (context) => SingleChildScrollView(
-                    child: Container(
+                  child: Container(
                       padding: EdgeInsets.only(
                           bottom: MediaQuery.of(context).viewInsets.bottom),
-                      child: AddtasktoScreen(),
-                    ),
-                  ));
+                      child: AddtasktoScreen(addTask))));
         },
         backgroundColor: Colors.white,
         child: Icon(Icons.add),
@@ -74,7 +92,7 @@ class TasksScreen extends StatelessWidget {
                   topRight: Radius.circular(20),
                 ),
               ),
-              child: TasksList(),
+              child: TasksList(tasks),
             ),
           )
         ],

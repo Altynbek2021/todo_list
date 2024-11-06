@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:todo_list/task.dart';
 
 class AddtasktoScreen extends StatelessWidget {
-  const AddtasktoScreen({super.key});
+  final Function addTaskCallback;
+  AddtasktoScreen(this.addTaskCallback);
 
   @override
   Widget build(BuildContext context) {
+    String newTaskTitle = "";
+
     return Container(
       padding: const EdgeInsets.all(20),
       child: Column(
@@ -19,9 +21,12 @@ class AddtasktoScreen extends StatelessWidget {
               fontWeight: FontWeight.w700,
             ),
           ),
-          const TextField(
+          TextField(
             autofocus: true,
             textAlign: TextAlign.center,
+            onChanged: (newText) {
+              newTaskTitle = newText;
+            },
           ),
           const SizedBox(
             height: 40,
@@ -31,7 +36,9 @@ class AddtasktoScreen extends StatelessWidget {
             child: TextButton(
               style: TextButton.styleFrom(
                   backgroundColor: Colors.lightBlueAccent, elevation: 20),
-              onPressed: () {},
+              onPressed: () {
+                addTaskCallback(newTaskTitle);
+              },
               child: const Text(
                 "Add",
                 style: TextStyle(color: Colors.white),
