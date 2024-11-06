@@ -1,51 +1,42 @@
 import 'package:flutter/material.dart';
 
-class TaskTile extends StatefulWidget {
-  @override
-  State<TaskTile> createState() => _TaskTileState();
-}
+class TaskTile extends StatelessWidget {
+  TaskTile({
+    required this.isChecked,
+    required this.taskTile,
+    required this.checkBoxCallback,
+  });
 
-class _TaskTileState extends State<TaskTile> {
-  bool isChecked = false;
+  final bool isChecked;
+  final String taskTile;
+  final Function(bool?) checkBoxCallback;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(
-        "This is task.",
-        style: TextStyle(
-            decoration: isChecked ? TextDecoration.lineThrough : null),
-      ),
-      trailing: CustomChekbox(
-          newvalue: isChecked,
-          changeValue: (newvalue) {
-            setState(() {
-              isChecked = newvalue;
-            });
-          }),
-    );
+        title: Text(
+          taskTile,
+          style: TextStyle(
+              decoration: isChecked ? TextDecoration.lineThrough : null),
+        ),
+        trailing: Checkbox(value: isChecked, onChanged: checkBoxCallback));
   }
 }
 
-class CustomChekbox extends StatelessWidget {
-  const CustomChekbox({
-    super.key,
-    required this.newvalue,
-    required this.changeValue,
-  });
-  final bool newvalue;
-  final Function changeValue;
+// class CustomChekbox extends StatelessWidget {
+//   const CustomChekbox({
+//     super.key,
+//     required this.newvalue,
+//     required this.changeValue,
+//   });
+//   final bool newvalue;
+//   final ValueChanged changeValue;
 
-  @override
-  Widget build(BuildContext context) {
-    return Checkbox(
-      value: newvalue,
-      onChanged: (condition) {
-        changeValue(condition);
-        //   setState(() {
-        //     isChecked = condition!;
-        //   });
-      },
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Checkbox(
+//       value: newvalue,
+//       onChanged: changeValue,
+//     );
+//   }
+// }
