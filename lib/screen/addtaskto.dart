@@ -36,7 +36,9 @@ class AddtasktoScreen extends StatelessWidget {
               style: TextButton.styleFrom(
                   backgroundColor: Colors.lightBlueAccent, elevation: 20),
               onPressed: () {
-                Provider.of<Tasksdata>(context).addTask(newTaskTitle);
+                Provider.of<Tasksdata>(context, listen: false)
+                    .addTask(newTaskTitle);
+                Navigator.pop(context);
               },
               child: const Text(
                 "Add",
